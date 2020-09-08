@@ -19,12 +19,12 @@ const App = props => {
 
     console.log(personsState, someOtherState);
 
-    const switchNameHandler = () => {
+    const switchNameHandler = (newName) => {
       console.log('Was Clicked!');
      // THIS IS BAD this.state.persons[0].name = 'Maximilian';
      setPersonsState({
       persons: [
-        {name:'Max', age:28},
+        {name:newName, age:28},
         {name:'Metro', age:1},
         {name:'Sebas', age:34}
       ]
@@ -34,10 +34,17 @@ const App = props => {
     return (
       <div className="App">
         <h1>hi i'm a React App</h1>
-        <button onClick={switchNameHandler}>Switch Name</button>
-        <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-        <Person name={personsState.persons[1].name} age={personsState.persons[1].age} > My hobbies: Breaking thinks</Person>
-        <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
+        <button onClick={() => switchNameHandler('Maxi')}>Switch Name</button>
+        <Person 
+        name={personsState.persons[0].name} 
+        age={personsState.persons[0].age} />
+        <Person 
+        name={personsState.persons[1].name} 
+        age={personsState.persons[1].age}
+        click={switchNameHandler.bind(this,'Metro!')} >My hobbies: Breaking thinks</Person>
+        <Person 
+        name={personsState.persons[2].name} 
+        age={personsState.persons[2].age} />
       </div>
       //React.createElement('div',{className:'App'},React.createElement('h1',null, 'Does this work now?'))
     );
