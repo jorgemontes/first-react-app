@@ -10,7 +10,8 @@ const App = props => {
         {name:'Maximilian', age:28},
         {name:'Metro', age:1},
         {name:'Sebas', age:37}
-      ]
+      ],
+      showPersons: false
     });
 
     const [someOtherState, setSomeOtherState] = useState(
@@ -41,6 +42,17 @@ const App = props => {
       });
     }
 
+    const togglePersonsHandler = () => {
+      const doesShow = personsState.showPersons;
+      setPersonsState({
+        persons: [
+          {name:'El Señor', age:28},
+          {name:'Metro', age:1},
+          {name:'Sebas', age:34}
+        ],
+        showPersons: !doesShow});
+    };
+
     const style = {
       backgroundColor: 'white',
       font: 'inherit',
@@ -54,18 +66,20 @@ const App = props => {
         <h1>hi i'm a React App</h1>
         <button 
         style={style}
-        onClick={() => switchNameHandler('Maxi')}>Switch Name</button>
-        <Person 
-        name={personsState.persons[0].name} 
-        age={personsState.persons[0].age} />
-        <Person 
-        name={personsState.persons[1].name} 
-        age={personsState.persons[1].age}
-        click={switchNameHandler.bind(this,'Metro!')}
-        changed={nameChangedHandler} >My hobbies: Breaking thinks</Person>
-        <Person 
-        name={personsState.persons[2].name} 
-        age={personsState.persons[2].age} />
+        onClick={togglePersonsHandler}>Switch Name</button>
+        {personsState.showPersons === true ? <div>
+          <Person 
+          name={personsState.persons[0].name} 
+          age={personsState.persons[0].age} />
+          <Person 
+          name={personsState.persons[1].name} 
+          age={personsState.persons[1].age}
+          click={switchNameHandler.bind(this,'Metro!')}
+          changed={nameChangedHandler} >My hobbies: Breaking thinks</Person>
+          <Person 
+          name={personsState.persons[2].name} 
+          age={personsState.persons[2].age} />
+       </div> : null}
       </div>
       //React.createElement('div',{className:'App'},React.createElement('h1',null, 'Does this work now?'))
     );
