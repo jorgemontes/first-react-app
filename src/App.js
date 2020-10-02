@@ -61,13 +61,11 @@ const App = props => {
       cursor: 'pointer'
     };
 
-    return (
-      <div className="App">
-        <h1>hi i'm a React App</h1>
-        <button 
-        style={style}
-        onClick={togglePersonsHandler}>Switch Name</button>
-        {personsState.showPersons === true ? <div>
+    let persons = null;
+
+    if(personsState.showPersons){
+      persons = (
+        <div>
           <Person 
           name={personsState.persons[0].name} 
           age={personsState.persons[0].age} />
@@ -79,9 +77,18 @@ const App = props => {
           <Person 
           name={personsState.persons[2].name} 
           age={personsState.persons[2].age} />
-       </div> : null}
+       </div>
+      );
+    }
+
+    return (
+      <div className="App">
+        <h1>hi i'm a React App</h1>
+        <button 
+        style={style}
+        onClick={togglePersonsHandler}>Switch Name</button>
+        {persons}
       </div>
-      //React.createElement('div',{className:'App'},React.createElement('h1',null, 'Does this work now?'))
     );
 };
 
