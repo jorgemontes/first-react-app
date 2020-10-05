@@ -7,9 +7,9 @@ const App = props => {
   const [personsState, setPersonsState ] = useState(
     {
       persons: [
-        {name:'Maximilian', age:28},
-        {name:'Metro', age:1},
-        {name:'Sebas', age:37}
+        {id: 'asdf', name:'Maximilian', age:28},
+        {id: 'dxf', name:'Metro', age:1},
+        {id: 'ar4f', name:'Sebas', age:37}
       ],
       showPersons: false
     });
@@ -68,7 +68,8 @@ const App = props => {
             return<Person 
               click={() => deletePersonHandler(index)}
               name={person.name} 
-              age={person.age} />;
+              age={person.age}
+              key={person.id} />;
           })}
        </div>
       );
