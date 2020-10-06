@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useImperativeHandle } from 'react';
 import './App.css';
 import Person from './Person/Person'
 
@@ -10,45 +11,45 @@ const App = props => {
         {id: 'asdf', name:'Maximilian', age:28},
         {id: 'dxf', name:'Metro', age:1},
         {id: 'ar4f', name:'Sebas', age:37}
-      ],
-      showPersons: false
+      ]
     });
 
-    const [someOtherState, setSomeOtherState] = useState(
-     'some other state'
+    const [showPersonsState, setShowPersonsState] = useState(
+     false
     );
 
-    console.log(personsState, someOtherState);
+    console.log(personsState, showPersonsState);
 
    const deletePersonHandler = (personIndex) =>{
      const persons = [...personsState.persons]
     persons.splice(personIndex,1);
      setPersonsState(
         {
-          persons:persons,
-          showPersons: personsState.showPersons
+          persons:persons
         });
    }
 
-    const nameChangedHandler = (event) => {
-      setPersonsState({
-        persons: [
-          {name:'Max', age:28},
-          {name: event.target.value, age:1},
-          {name:'Sebas', age:34}
-        ]
-      });
+    const nameChangedHandler = (event, id) => {
+
+      const personIndex = personsState.persons.findIndex(p => {
+        return p.id === id;
+      })
+
+      const person = {
+        ...personsState.persons[personIndex]
+      }
+
+      person.name = event.target.value;
+
+      const persons = [...personsState.persons];
+      persons[personIndex] = person;
+
+      setPersonsState({persons:persons});
     }
 
     const togglePersonsHandler = () => {
       const doesShow = personsState.showPersons;
-      setPersonsState({
-        persons: [
-          {name:'El Señor', age:28},
-          {name:'Metro', age:1},
-          {name:'Sebas', age:34}
-        ],
-        showPersons: !doesShow});
+      setShowPersonsState(!doesShow);
     };
 
     const style = {
@@ -61,7 +62,7 @@ const App = props => {
 
     let persons = null;
 
-    if(personsState.showPersons){
+    if(showPersonsState){
       persons = (
         <div>
           {personsState.persons.map((person,index) => {
@@ -69,7 +70,8 @@ const App = props => {
               click={() => deletePersonHandler(index)}
               name={person.name} 
               age={person.age}
-              key={person.id} />;
+              key={person.id}
+              changed={(event) => nameChangedHandler(event,person.id)} />;
           })}
        </div>
       );
