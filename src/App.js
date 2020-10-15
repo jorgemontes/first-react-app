@@ -48,12 +48,13 @@ const App = props => {
     }
 
     const togglePersonsHandler = () => {
-      const doesShow = personsState.showPersons;
+      const doesShow = showPersonsState;
       setShowPersonsState(!doesShow);
     };
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -75,14 +76,15 @@ const App = props => {
           })}
        </div>
       );
+      style.backgroundColor = 'red';
     }
 
     return (
       <div className="App">
         <h1>hi i'm a React App</h1>
         <button 
-        style={style}
-        onClick={togglePersonsHandler}>Switch Name</button>
+          style={style}
+          onClick={togglePersonsHandler}>Switch Name</button>
         {persons}
       </div>
     );
