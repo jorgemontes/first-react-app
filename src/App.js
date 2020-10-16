@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useImperativeHandle } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Person from './Person/Person';
+import Radium from 'radium';
 
 const App = props => {
 
@@ -58,7 +59,11 @@ const App = props => {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -77,6 +82,10 @@ const App = props => {
        </div>
       );
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     let classes = [];
@@ -100,4 +109,4 @@ const App = props => {
     );
 };
 
-export default App;
+export default Radium(App);
