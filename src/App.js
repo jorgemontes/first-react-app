@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useImperativeHandle } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 
 const App = props => {
 
@@ -98,6 +98,7 @@ const App = props => {
     }
 
     return (
+      <StyleRoot>
       <div className="App">
         <h1>hi i'm a React App</h1>
         <p className={classes.join(' ')}>This is really working!</p>
@@ -106,6 +107,7 @@ const App = props => {
           onClick={togglePersonsHandler}>Switch Name</button>
         {persons}
       </div>
+      </StyleRoot>
     );
 };
 
