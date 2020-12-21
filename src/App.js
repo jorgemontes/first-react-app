@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useImperativeHandle } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 const StyledButton = styled.button`
       background-color: ${props => props.alt ? 'red': 'green'};
@@ -86,12 +87,13 @@ const App = props => {
       persons = (
         <div>
           {personsState.persons.map((person,index) => {
-            return<Person 
+            return<ErrorBoundary><Person 
               click={() => deletePersonHandler(index)}
               name={person.name} 
               age={person.age}
               key={person.id}
-              changed={(event) => nameChangedHandler(event,person.id)} />;
+              changed={(event) => nameChangedHandler(event,person.id)} /></ErrorBoundary>
+              ;
           })}
        </div>
       );
