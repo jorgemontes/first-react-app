@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useImperativeHandle } from 'react';
 import './App.css';
+
 import Person from '../components/Persons/Person/Person';
+
 
 const StyledButton = styled.button`
       background-color: ${props => props.alt ? 'red': 'green'};
@@ -91,7 +93,8 @@ const App = props => {
               name={person.name} 
               age={person.age}
               key={person.id}
-              changed={(event) => nameChangedHandler(event,person.id)} />;
+              changed={(event) => nameChangedHandler(event,person.id)} />
+              ;
           })}
        </div>
       );
