@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useImperativeHandle } from 'react';
 import './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 const StyledButton = styled.button`
       background-color: ${props => props.alt ? 'red': 'green'};
