@@ -1,24 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useImperativeHandle } from 'react';
 import './App.css';
 
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 
-const StyledButton = styled.button`
-      background-color: ${props => props.alt ? 'red': 'green'};
-      color: white;
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: ${props => props.alt ? 'salmon': 'lightgreen'};
-        color: black
-      }
-`;
 
 const App = props => {
 
@@ -85,19 +72,7 @@ const App = props => {
     let persons = null;
 
     if(showPersonsState){
-      persons = (
-        <div>
-          {personsState.persons.map((person,index) => {
-            return<Person 
-              click={() => deletePersonHandler(index)}
-              name={person.name} 
-              age={person.age}
-              key={person.id}
-              changed={(event) => nameChangedHandler(event,person.id)} />
-              ;
-          })}
-       </div>
-      );
+      persons = <Persons persons={personsState.persons} clicked={deletePersonHandler} changed={nameChangedHandler}></Persons>;
      // style.backgroundColor = 'red';
      // style[':hover'] = {
      //   backgroundColor: 'salmon',
@@ -105,21 +80,9 @@ const App = props => {
      // }
     }
 
-    let classes = [];
-
-    if(personsState.persons.length <= 2 ){
-      classes.push('red');
-    }
-    if(personsState.persons.length <= 1){
-      classes.push('bold');
-    }
-
     return (
       <div className="App">
-        <h1>hi i'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <StyledButton alt={showPersonsState}
-          onClick={togglePersonsHandler}>Switch Name</StyledButton>
+        <Cockpit persons={personsState.persons} clicked={togglePersonsHandler}></Cockpit>
         {persons}
       </div>
     );
