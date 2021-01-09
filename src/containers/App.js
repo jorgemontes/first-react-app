@@ -82,7 +82,7 @@ const App = props => {
 
     return (
       <div className="App">
-        <Cockpit persons={personsState.persons} clicked={togglePersonsHandler}></Cockpit>
+        <Cockpit title={props.appTitle} persons={personsState.persons} clicked={togglePersonsHandler}></Cockpit>
         {persons}
       </div>
     );
